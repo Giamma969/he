@@ -6,10 +6,15 @@ import numpy as np
 #calculate type of paper for year
 def venue_in_year(venue, year) :
     df1 = df_merged[df_merged['Anno'] == year]
-    df2 = df1[df1['Tipo Venue'] == venue] 
-    #"df2.index" also counts the nan values --> some value in 'Tipo Venue' column are nan
+    df2 = df1[df1['Tipo Venue'] == venue]
     return (0 if df2.empty else len(df2.index))
 
+
+#set text size
+textsize = 11
+
+#set bar width
+barWidth = 0.8
 
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
@@ -60,12 +65,39 @@ plotdata = pd.DataFrame({
     index=np.sort(np.array(yrs))
 )
 
+values = np.array([j2018, c2018, w2018, j2019, c2019, w2019, j2020, c2020, w2020])
+
+hunds = [100 for x in values]
+# Set position of bar on y axis
+r1 = np.arange(len(hunds))
+r1 = [x * 0.165 for x in r1]
+r2 = [x + barWidth for x in r1]
+
+
 plotdata.plot(kind="bar")
+plt.title("Papers vs Years")
+plt.gcf().subplots_adjust(bottom=0.15)
 plt.xticks(rotation='horizontal')
 plt.yticks(np.arange(0,50,5))
-plt.title("Papers vs Years")
+plt.axis(ymin=0, ymax=50)
+plt.tight_layout()
+
+
+#insert total and ratio 
+increment = 0
+for i,v in enumerate(values):
+    if i in [3,6] :
+        increment += 0.507
+    if i in [2,5,8] :
+        plt.text(r2[i] + increment - 0.98,v + 0.5 , "{}".format(str(v)), size = textsize)
+    else :   
+        plt.text(r2[i] + increment - 0.99,v + 0.5 , "{}".format(str(v)), size = textsize)   
+
+
+#legend
 plt.xlabel("Years")
 plt.ylabel("Papers")
 plt.legend(loc="upper left")
-plt.tight_layout()
+
+#save figure
 plt.savefig('../data/figures/papers_vs_years.pdf', format='pdf')

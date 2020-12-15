@@ -71,12 +71,14 @@ colors=["limegreen", "darkorange", "darkred", "grey", "blue", "purple", "black",
 
 
 hunds = [100 for x in values]
-
+print(hunds)
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
+print(r1)
 r1 = [x for x in r1]
+print(r1)
 r2 = [x + barWidth for x in r1]
-
+print(r2)
 
 #calculate ratio
 total = sum(values)
@@ -91,7 +93,7 @@ plt.yticks(fontsize=textsize)
 plt.rcParams["figure.figsize"] = ['12','6']
 plt.barh(names, values, height=barWidth, color=colors)
 
-#insert total and ratio for each library 
+#insert total and ratio for each lib 
 for i, (v, p) in enumerate(zip(values, ratios)):
     plt.text(v + 0.3, r2[i] - 0.6, "{} ({}%)".format(str(v),str(p)), size = textsize)   
     
