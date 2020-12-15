@@ -11,10 +11,10 @@ def venue_in_year(venue, year) :
 
 
 #set text size
-textsize = 11
+textsize = 10
 
 #set bar width
-barWidth = 0.8
+barWidth = 0.7
 
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
@@ -80,7 +80,7 @@ plt.gcf().subplots_adjust(bottom=0.15)
 plt.xticks(rotation='horizontal')
 plt.yticks(np.arange(0,50,5))
 plt.axis(ymin=0, ymax=50)
-plt.tight_layout()
+# plt.tight_layout()
 
 
 #insert total and ratio 
@@ -89,9 +89,9 @@ for i,v in enumerate(values):
     if i in [3,6] :
         increment += 0.507
     if i in [2,5,8] :
-        plt.text(r2[i] + increment - 0.98,v + 0.5 , "{}".format(str(v)), size = textsize)
+        plt.text(r2[i] + increment - 0.89,v + 0.5 , "{}".format(str(v)), size = textsize)
     else :   
-        plt.text(r2[i] + increment - 0.99,v + 0.5 , "{}".format(str(v)), size = textsize)   
+        plt.text(r2[i] + increment - 0.905,v + 0.5 , "{}".format(str(v)), size = textsize)   
 
 
 #legend
