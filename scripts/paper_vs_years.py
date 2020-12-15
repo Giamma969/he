@@ -5,8 +5,8 @@ import numpy as np
 
 #calculate type of paper for year
 def venue_in_year(venue, year) :
-    df1 = df_merged[ df_merged['Anno'] == year]
-    df2 = df1 [df1['Tipo Venue'] == venue] 
+    df1 = df_merged[df_merged['Anno'] == year]
+    df2 = df1[df1['Tipo Venue'] == venue] 
     #"df2.index" also counts the nan values --> some value in 'Tipo Venue' column are nan
     return (0 if df2.empty else len(df2.index))
 
@@ -23,8 +23,6 @@ df2_dropped = df2[['Tipo Venue','Anno']]
 
 #merge dataframe
 df_merged = df1_dropped.append(df2_dropped)
-
-
 
 years = np.array(df_merged['Anno'])
 
