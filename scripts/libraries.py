@@ -15,11 +15,9 @@ IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 df1 = pd.read_excel (IN_FILE, sheet_name='Copia selezione')
 df2 = pd.read_excel (IN_FILE, sheet_name='Copia snowballing')
 
-#Extract the columns "Tipo Venue", "Anno", "Libreria" e "Linguaggio"
+#Extract the column "Libreria" and merge
 df1_dropped = df1[['Libreria']]
 df2_dropped = df2[['Libreria']]
-
-#merge dataframe
 df_merged = df1_dropped.append(df2_dropped)
 
 #take libraries
