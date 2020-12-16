@@ -14,7 +14,7 @@ def venue_in_year(venue, year) :
 textsize = 10
 
 #set bar width
-barWidth = 0.7
+barWidth = 0.5
 
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
@@ -54,8 +54,7 @@ c2020 = venue_in_year("C", 2020)
 w2020 = venue_in_year("W", 2020)
 
 
-# fig, ax = plt.subplots()
-plotdata = pd.DataFrame({
+data = pd.DataFrame({
     "Journal":[j2018, j2019, j2020],
     "Conference":[c2018, c2019, c2020],
     "Workshop":[w2018, w2019, w2020]
@@ -68,34 +67,35 @@ values = np.array([j2018, c2018, w2018, j2019, c2019, w2019, j2020, c2020, w2020
 hunds = [100 for x in values]
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
-r1 = [x * 0.165 for x in r1]
-r2 = [x + barWidth for x in r1]
+r1 = [x * (barWidth/3) for x in r1]
 
 
-plotdata.plot(kind="bar")
-plt.title("Papers vs Years")
-plt.gcf().subplots_adjust(bottom=0.15)
+data.plot(kind="bar", width=barWidth, alpha=0.9)
+plt.title("Pubblicazioni negli anni")
 plt.xticks(rotation='horizontal')
-plt.yticks(np.arange(0,50,5))
+plt.yticks(np.arange(0,55,5))
 plt.axis(ymin=0, ymax=50)
-# plt.tight_layout()
+
+#legend
+plt.xlabel("Anno")
+plt.ylabel("Numero di pubblicazioni")
+plt.legend(loc="upper left")
 
 
 #insert total and ratio 
-increment = 0
+padding = 0
 for i,v in enumerate(values):
-    if i in [3,6] :
-        increment += 0.507
-    if i in [2,5,8] :
-        plt.text(r2[i] + increment - 0.88,v + 0.5 , "{}".format(str(v)), size = textsize)
+    if i in [0] :
+        plt.text(r1[i] + padding - 0.22,v + 0.5 , "{}".format(str(v)), size = textsize)
+    elif i in [3,6] :
+        padding += barWidth
+        plt.text(r1[i] + padding - 0.22,v + 0.5 , "{}".format(str(v)), size = textsize)
+    elif i % 3 == 2 :
+        plt.text(r1[i] + padding -0.20,v + 0.5 , "{}".format(str(v)), size = textsize)
     else :   
-        plt.text(r2[i] + increment - 0.895,v + 0.5 , "{}".format(str(v)), size = textsize)   
+        plt.text(r1[i]+ padding - 0.22,v + 0.5 , "{}".format(str(v)), size = textsize)
 
-
-#legend
-plt.xlabel("Years")
-plt.ylabel("Papers")
-plt.legend(loc="upper right")
+plt.tight_layout()
 
 #save figure
-plt.savefig('../data/figures/papers_vs_years.pdf', format='pdf')
+plt.savefig('../data/figures/venue_vs_years.pdf', format='pdf')

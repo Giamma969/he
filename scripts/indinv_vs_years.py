@@ -14,7 +14,7 @@ def indinv_in_year(indinv, year) :
 textsize = 10
 
 #set bar width
-barWidth = 0.7
+barWidth = 0.5
 
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
@@ -54,10 +54,9 @@ i2020 = indinv_in_year("I", 2020)
 m2020 = indinv_in_year("M", 2020)
 
 
-# fig, ax = plt.subplots()
 plotdata = pd.DataFrame({
-    "Academy":[a2018, a2019, a2020],
-    "Industry":[i2018, i2019, i2020],
+    "Università":[a2018, a2019, a2020],
+    "Industria":[i2018, i2019, i2020],
     "Mix":[m2018, m2019, m2020]
     }, 
     index=np.sort(np.array(yrs))
@@ -68,34 +67,34 @@ values = np.array([a2018, i2018, m2018, a2019, i2019, m2019, a2020, i2020, m2020
 hunds = [100 for x in values]
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
-r1 = [x * 0.165 for x in r1]
-r2 = [x + barWidth for x in r1]
+r1 = [x * (barWidth/3) for x in r1]
 
 
-plotdata.plot(kind="bar")
-plt.title("Industry involvement vs Years")
-plt.gcf().subplots_adjust(bottom=0.15)
+plotdata.plot(kind="bar", width=barWidth, alpha=0.9)
+plt.title("Coinvolgimento delle industrie negli anni")
 plt.xticks(rotation='horizontal')
-plt.yticks(np.arange(0,50,5))
+plt.yticks(np.arange(0,55,5))
 plt.axis(ymin=0, ymax=52)
-# plt.tight_layout()
+
+#legend
+plt.xlabel("Anno")
+plt.ylabel("Numero di pubblicazioni")
+plt.legend(loc="upper left")
+
+plt.tight_layout()
 
 
 #insert total and ratio 
-increment = 0
+padding = 0
 for i,v in enumerate(values):
     if i in [3,6] :
-        increment += 0.507
-    if i in [1,4,7] :
-        plt.text(r2[i] + increment - 0.88,v + 0.5 , "{}".format(str(v)), size = textsize)
+        padding += barWidth
+        plt.text(r1[i] + padding - 0.22,v + 0.5 , "{}".format(str(v)), size = textsize)
+    elif i % 3 == 1 :
+        plt.text(r1[i] + padding - 0.2,v + 0.5 , "{}".format(str(v)), size = textsize)
     else :   
-        plt.text(r2[i] + increment - 0.895,v + 0.5 , "{}".format(str(v)), size = textsize)   
+        plt.text(r1[i] + padding - 0.22,v + 0.5 , "{}".format(str(v)), size = textsize)
 
-
-#legend
-plt.xlabel("Years")
-plt.ylabel("Industry involvement")
-plt.legend(loc="upper right")
 
 #save figure
 plt.savefig('../data/figures/indinv_vs_years.pdf')

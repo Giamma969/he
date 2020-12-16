@@ -24,22 +24,29 @@ def dict_lib(libraries) :
         d[lib] = d.get(lib, 0) + 1
     return d
 
-#group less important libraries in 'others' 
+#group less important libraries in 'altro' 
 def group(d1) :
     l = list()
     for k,v in d1.items() :
         if k in ['Cingulata','Gazelle','GMP', 'ABY','FHEW','PySEAL'] :
             for i in range(v) :
-                l.append('Other')
+                l.append('Altro')
         else :
             for i in range (v) :
                 l.append(k)
-    #new dictionary with "other" added
+    #new dictionary with "altro" added
     d2 = dict()
     for lib in l :
         d2[lib] = d2.get(lib, 0) + 1
     return d2
 
+
+
+#set text size
+textsize = 7
+
+#set bar width
+barWidth = 0.75
 
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
@@ -68,7 +75,7 @@ dict2018 = dict_lib(p2018_cleaned)
 dict2019 = dict_lib(p2019_cleaned)
 dict2020 = dict_lib(p2020_cleaned)
 
-#group less important libraries in other
+#group less important libraries in "altro"
 dict2018grouped = group(dict2018)
 dict2019grouped = group(dict2019)
 dict2020grouped = group(dict2020)
@@ -85,32 +92,45 @@ data = pd.DataFrame({
     "PALISADE":[0,3,2],
     "NFLlib":[2,2,0],
     "Custom":[4,3,2],
-    "Other":[1,5,4]
+    "Altro":[1,5,4]
     }, 
     index=years
 )
 
-# values = np.array([a2018, i2018, m2018, a2019, i2019, m2019, a2020, i2020, m2020])
+values = np.array([13,11,5,3,3,0,2,4,1,14,20,6,7,2,3,2,3,5,17,11,7,8,5,2,0,2,4])
 
-# hunds = [100 for x in values]
-# # Set position of bar on y axis
-# r1 = np.arange(len(hunds))
-# r1 = [x * 0.165 for x in r1]
-# r2 = [x + barWidth for x in r1]
+hunds = [100 for x in values]
+# Set position of bar on y axis
+r1 = np.arange(len(hunds))
+r1 = [x * (barWidth / 9) for x in r1]
 
 #plot
-data.plot(kind="bar", width=0.8)
-plt.title("Librerie utilizzate negli anni")
-plt.gcf().subplots_adjust(bottom=0.15)
-plt.xticks(rotation='horizontal')
-plt.yticks(np.arange(0,25,5))
+data.plot(kind="bar", width=barWidth)
+plt.title("Librerie utilizzate negli anni", fontsize=textsize + 3)
+plt.xticks(rotation='horizontal', fontsize=textsize)
+plt.yticks(np.arange(0,30,5), fontsize=textsize)
 plt.axis(ymin=0, ymax=25)
-# plt.tight_layout()
+
+#insert total and ratio 
+padding = 0
+for i,v in enumerate(values):
+    if i in [0] :
+        plt.text(r1[i] + padding - 0.37,v + 0.2 , "{}".format(str(v)), size = textsize)
+    elif v < 10 :
+        plt.text(r1[i]+ padding - 0.355,v + 0.2 , "{}".format(str(v)), size = textsize)
+    elif i % 9 == 0 :
+        padding += 0.25
+        plt.text(r1[i] + padding - 0.37,v + 0.2 , "{}".format(str(v)), size = textsize)
+    else :   
+        plt.text(r1[i]+ padding - 0.37,v + 0.2 , "{}".format(str(v)), size = textsize)
+
 
 #legend
 plt.xlabel("Anno")
 plt.ylabel("Numero di utilizzi")
+plt.legend(loc="best", fontsize=textsize)
 
+plt.tight_layout()
 
 #save figure
 plt.savefig('../data/figures/libraries_vs_years.pdf')
