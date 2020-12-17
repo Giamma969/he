@@ -91,4 +91,4 @@ for i, (v, p) in enumerate(zip(values, ratios)):
     
 
 #save figure
-plt.savefig('../data/figures/libraries.pdf', format='pdf')
+plt.savefig('../data/figures/libraries.pdf')
