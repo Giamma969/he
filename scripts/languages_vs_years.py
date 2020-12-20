@@ -59,9 +59,9 @@ dict2018 = dict_lan(p2018_cleaned)
 dict2019 = dict_lan(p2019_cleaned)
 dict2020 = dict_lan(p2020_cleaned)
 
-print(2018,dict2018)
-print(2019,dict2019)
-print(2020,dict2020)
+# print(2018,dict2018)
+# print(2019,dict2019)
+# print(2020,dict2020)
 
 #add data manually
 years = np.array([2018,2019,2020])
@@ -85,10 +85,10 @@ r1 = [x * (barWidth / 6) for x in r1]
 
 #plot
 data.plot(kind="bar", width=barWidth)
-plt.title("Linguaggi utilizzate negli anni", fontsize=textsize + 3)
+# plt.title("Linguaggi utilizzate negli anni", fontsize=textsize + 3)
 plt.xticks(rotation='horizontal', fontsize=textsize)
 plt.yticks(np.arange(0,30,5), fontsize=textsize)
-plt.axis(ymin=0, ymax=30)
+plt.axis(ymin=0, ymax=25)
 
 #insert total and ratio 
 padding = 0

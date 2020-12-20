@@ -76,7 +76,7 @@ for v in values :
 
 #plot
 plt.barh(names, values, height=barWidth, alpha=0.8)
-plt.title("Librerie utilizzate")
+# plt.title("Librerie utilizzate")
 plt.xticks(np.arange(0,65,5), fontsize=textsize)
 plt.yticks(fontsize=textsize)
 plt.xlabel("Numero di utilizzi (%)")

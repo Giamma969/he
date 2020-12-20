@@ -71,7 +71,7 @@ r1 = [x * (barWidth/3) for x in r1]
 
 
 plotdata.plot(kind="bar", width=barWidth, alpha=0.9)
-plt.title("Coinvolgimento delle industrie negli anni")
+# plt.title("Coinvolgimento delle industrie negli anni")
 plt.xticks(rotation='horizontal')
 plt.yticks(np.arange(0,55,5))
 plt.axis(ymin=0, ymax=52)

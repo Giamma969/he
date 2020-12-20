@@ -103,7 +103,7 @@ r3 = [x + barWidth for x in r2]
 
 # Make the plot
 fig = plt.figure(num=None, figsize=(6, 11), dpi=80)
-plt.title("Domini di applicazione negli anni", fontsize=9)
+# plt.title("Domini di applicazione negli anni", fontsize=9)
 plt.xlim(0,45)
 plt.ylim(-1,len(domains) * 3)
 plt.barh(r3, values_2018, height=barWidth, label='2018')

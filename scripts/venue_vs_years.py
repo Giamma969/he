@@ -71,7 +71,7 @@ r1 = [x * (barWidth/3) for x in r1]
 
 
 data.plot(kind="bar", width=barWidth, alpha=0.9)
-plt.title("Pubblicazioni negli anni")
+# plt.title("Pubblicazioni negli anni")
 plt.xticks(rotation='horizontal')
 plt.yticks(np.arange(0,55,5))
 plt.axis(ymin=0, ymax=50)

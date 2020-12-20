@@ -61,7 +61,7 @@ for v in values :
 
 #plot
 plt.barh(names, values, height=barWidth, alpha=0.8)
-plt.title("Domini di applicazione", fontsize=textsize + 2)
+# plt.title("Domini di applicazione", fontsize=textsize + 2)
 plt.xlim(0,105)
 plt.xticks(np.arange(0,115,5), fontsize=textsize - 1)
 plt.yticks(fontsize=textsize)

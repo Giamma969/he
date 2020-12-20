@@ -57,7 +57,7 @@ r2 = [x + (barWidth /len(names)) for x in r1]
 
 #plot
 plt.bar(names, values, width=barWidth, alpha=0.8)
-plt.title("Linguaggi utilizzati")
+# plt.title("Linguaggi utilizzati")
 plt.xticks(fontsize=textsize)
 plt.yticks(fontsize=textsize)
 plt.ylabel("Numero di utilizzi")

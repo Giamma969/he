@@ -106,7 +106,7 @@ r1 = [x * (barWidth / 9) for x in r1]
 
 #plot
 data.plot(kind="bar", width=barWidth)
-plt.title("Librerie utilizzate negli anni", fontsize=textsize + 3)
+# plt.title("Librerie utilizzate negli anni", fontsize=textsize + 3)
 plt.xticks(rotation='horizontal', fontsize=textsize)
 plt.yticks(np.arange(0,30,5), fontsize=textsize)
 plt.axis(ymin=0, ymax=25)

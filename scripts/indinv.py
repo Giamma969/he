@@ -41,7 +41,7 @@ for i,v in enumerate(values):
     else :
         plt.text(r1[i] - 0.05, v + 0.7, "{}".format(str(v)), size = textsize)
 
-plt.title("Coinvolgimento delle industrie", fontsize=textsize + 2)
+# plt.title("Coinvolgimento delle industrie", fontsize=textsize + 2)
 plt.axis(ymax=140)
 plt.xticks(fontsize=textsize - 1)
 plt.yticks(fontsize=textsize - 1)
