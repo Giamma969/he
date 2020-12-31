@@ -59,29 +59,30 @@ dict2018 = dict_lan(p2018_cleaned)
 dict2019 = dict_lan(p2019_cleaned)
 dict2020 = dict_lan(p2020_cleaned)
 
-# print(2018,dict2018)
-# print(2019,dict2019)
-# print(2020,dict2020)
+# print(2018,dict2018,'\n')
+# print(2019,dict2019, '\n')
+# print(2020,dict2020, '\n')
 
 #add data manually
 years = np.array([2018,2019,2020])
 data = pd.DataFrame({
-    "C++":[14,19,22],
+    "C++":[14,19,23],
     "Python":[3,9,13],
     "Java":[1,1,2],
     "C#":[1,0,1],
     "C":[0,1,1],
+    "MATLAB":[0,0,1],
     "GO":[0,0,1]
     }, 
     index=years
 )
 
-values = np.array([14,3,1,1,0,0,19,9,1,0,1,0,22,13,2,1,1,1])
+values = np.array([14,3,1,1,0,0,0,19,9,1,0,1,0,0,23,13,2,1,1,1,1])
 
 hunds = [100 for x in values]
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
-r1 = [x * (barWidth / 6) for x in r1]
+r1 = [x * (barWidth / 7) for x in r1]
 
 #plot
 data.plot(kind="bar", width=barWidth)
@@ -94,14 +95,14 @@ plt.axis(ymin=0, ymax=25)
 padding = 0
 for i,v in enumerate(values):
     if i in [0] :
-        plt.text(r1[i] + padding - 0.35,v + 0.2 , "{}".format(str(v)), size = textsize)
+        plt.text(r1[i] + padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
     elif v < 10 :
-        plt.text(r1[i]+ padding - 0.335,v + 0.2 , "{}".format(str(v)), size = textsize)
-    elif i % 6 == 0 :
+        plt.text(r1[i]+ padding - 0.345,v + 0.2 , "{}".format(str(v)), size = textsize)
+    elif i % 7 == 0 :
         padding += 0.25
-        plt.text(r1[i] + padding - 0.35,v + 0.2 , "{}".format(str(v)), size = textsize)
+        plt.text(r1[i] + padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
     else :   
-        plt.text(r1[i]+ padding - 0.35,v + 0.2 , "{}".format(str(v)), size = textsize)
+        plt.text(r1[i]+ padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
 
 
 #legend

@@ -28,7 +28,7 @@ def dict_lib(libraries) :
 def group(d1) :
     l = list()
     for k,v in d1.items() :
-        if k in ['Cingulata','Gazelle','GMP', 'ABY','FHEW','PySEAL'] :
+        if k in ['Cingulata','Gazelle','GMP', 'ABY','FHEW','PySEAL','HEML','Armadillo'] :
             for i in range(v) :
                 l.append('Altro')
         else :
@@ -80,24 +80,28 @@ dict2018grouped = group(dict2018)
 dict2019grouped = group(dict2019)
 dict2020grouped = group(dict2020)
 
+# print('2018', dict2018grouped, '\n')
+# print('2019', dict2019grouped, '\n')
+# print('2020', dict2020grouped, '\n')
+
 
 #add data manually
 years = np.array([2018,2019,2020])
 data = pd.DataFrame({
-    "SEAL":[13,14,17],
-    "HElib":[11,20,11],
-    "HEAAN":[5,6,7],
+    "SEAL":[13,16,16],
+    "HElib":[11,20,10],
+    "HEAAN":[4,4,6],
     "TFHE":[3,7,8],
     "Python-Paillier":[3,2,5],
     "PALISADE":[0,3,2],
     "NFLlib":[2,2,0],
-    "Custom":[4,3,2],
-    "Altro":[1,5,4]
+    "Custom":[1,2,0],
+    "Altro":[3,6,4]
     }, 
     index=years
 )
 
-values = np.array([13,11,5,3,3,0,2,4,1,14,20,6,7,2,3,2,3,5,17,11,7,8,5,2,0,2,4])
+values = np.array([13,11,4,3,3,0,2,1,3,16,20,4,7,2,3,2,2,6,16,10,6,8,5,2,0,0,4])
 
 hunds = [100 for x in values]
 # Set position of bar on y axis

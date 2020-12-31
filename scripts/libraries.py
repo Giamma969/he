@@ -40,10 +40,13 @@ dict_lib = dict()
 for lib in libreries_cleaned :
     dict_lib[lib] = dict_lib.get(lib, 0) + 1
 
+print(dict_lib, '\n')
+
+
 #group k in 'altro' when value(k) <= 3
 libraries_final = list()
 for k,v in dict_lib.items() :
-    if v <= 3 :
+    if v <= 3 and k != 'Custom':
         for i in range(v) :
             libraries_final.append('Altro')
     else :
@@ -57,6 +60,9 @@ for lib in libraries_final :
 
 #sort dictionary for value
 sorted_d = dict( sorted(dict_lib2.items(), key=operator.itemgetter(1)))
+
+# print(sorted_d)
+
 
 names = list(sorted_d.keys())
 values = list(sorted_d.values())

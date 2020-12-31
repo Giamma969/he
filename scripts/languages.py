@@ -44,6 +44,8 @@ for l in languages_cleaned :
 #sort dictionary for value
 sorted_d = dict( sorted(dict_l.items(), key=operator.itemgetter(1), reverse=True))
 
+
+
 names = list(sorted_d.keys())
 values = list(sorted_d.values())
 
