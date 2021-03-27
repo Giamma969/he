@@ -44,8 +44,8 @@ barWidth = 0.8
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
 #take both original sheets
-df1 = pd.read_excel (IN_FILE, sheet_name='Copia selezione')
-df2 = pd.read_excel (IN_FILE, sheet_name='Copia snowballing')
+df1 = pd.read_excel (IN_FILE, sheet_name='Selezione rivisto')
+df2 = pd.read_excel (IN_FILE, sheet_name='Snowballing rivisto')
 
 #Extract the columns "Schema di crittografia","Anno" and merge
 df1_dropped = df1[['Schema di crittografia','Anno']]
@@ -135,7 +135,7 @@ for i, (v, p) in enumerate(zip(values_2020, ratios_2020)):
 
 
 # Add xticks on the middle of the group bars
-plt.ylabel('Crittosistemi omomorfi', fontsize=textsize)
+plt.ylabel('Crittosistemi omomorfici', fontsize=textsize)
 plt.xlabel('Numero di utilizzi (%)', fontsize=textsize)
 plt.xticks(np.arange(0,30,5), fontsize=textsize)
 plt.yticks([r + barWidth for r in r1], schemes, fontsize=textsize)

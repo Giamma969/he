@@ -1,0 +1,32 @@
+Needs further study to be usable >>> 137
+It can be used >>> 14
+It can be used partially >>> 4
+Not specified usable >>> 32
+
+Need to improve performance >>> 81
+	Needs to improve accuracy >>> 16
+	Need to reduce overhead (computational cost) due from HE >>> 55
+	Need to reduce overhead (storage) due from HE >>> 7
+	Need to improve performance not specified >>> 16
+
+		HE techniques
+		--> Implementing HE optimizations >>> 24
+		--> Use bootstrapping >>> 4
+		--> Use SIMD >>> 6
+		--> Vary the setup parameters >>> 9
+		--> Use a different homomorphic schema >>> 10
+
+		Non-HE techniques
+		--> Applying parallelism >>> 21
+		--> Externalizing the encryption service using micro services >>> 1
+		--> Use HW solutions >>> 13
+
+Needs to improve security >>> 23
+Need for the number of iterations to be provided in advance >>> 5
+Difficulty of developing HE-based applications >>> 4
+--> Apply the proposed solution to concrete use-cases >>> 16
+--> Test the work on further data >>> 14
+--> Advancement of HE technologies >>> 12
+--> Extend the protocol to apply it to different scenarios >>> 56
+	--> Extend the work to other ML algorithms >>> 16
+--> They will use a non-HE based solution >>> 1

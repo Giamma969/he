@@ -12,8 +12,8 @@ textsize = 7
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
 #take both original sheets
-df1 = pd.read_excel (IN_FILE, sheet_name='Copia selezione')
-df2 = pd.read_excel (IN_FILE, sheet_name='Copia snowballing')
+df1 = pd.read_excel (IN_FILE, sheet_name='Selezione rivisto')
+df2 = pd.read_excel (IN_FILE, sheet_name='Snowballing rivisto')
 
 #Extract the column "Dominio" and merge
 df1_dropped = df1[['Dominio']]
@@ -31,7 +31,7 @@ for d in domains :
         d_temp=d.split(', ')
         for elem in d_temp :
             domains_cleaned.append(elem)
-    #otherwise add if not consistent
+    #otherwise add if not inconsistent
     elif (type(d) != float):
         domains_cleaned.append(d)
 

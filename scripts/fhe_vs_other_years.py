@@ -17,29 +17,24 @@ def clean(types) :
             types_cleaned.append(t)
     return types_cleaned
 
+
+#group 'Altro' if type != FHE and type != HE 
+def group(types) :
+    l = list()
+    for elem in types :
+        if elem != 'HE' and elem != 'FHE' :
+            l.append('Altro')
+        else :
+            l.append(elem)
+    return l
+
+
 #retrieve a dictionary for HE types
 def dict_t(types) :
     d = dict()
     for t in types :
         d[t] = d.get(t, 0) + 1
     return d
-
-#group less important HE types in 'altro' 
-def group(d1) :
-    l = list()
-    for k,v in d1.items() :
-        if k in ['PAHE','MK-HE','LinHAE'] :
-            for i in range(v) :
-                l.append('Altro')
-        else :
-            for i in range (v) :
-                l.append(k)
-    #new dictionary with "altro" added
-    d2 = dict()
-    for t in l :
-        d2[t] = d2.get(t, 0) + 1
-    return d2
-
 
 
 #set text size
@@ -66,67 +61,66 @@ p2020 = df_merged[df_merged['Anno']==2020.0]
 p2018_cleaned = clean(list(p2018['Tipo HE']))
 p2019_cleaned = clean(list(p2019['Tipo HE']))
 p2020_cleaned = clean(list(p2020['Tipo HE']))
-total2018 = len(p2018_cleaned)
-total2019 = len(p2019_cleaned)
-total2020 = len(p2020_cleaned)
-
-#count occurrences of types HE for each year
-dict2018 = dict_t(p2018_cleaned)
-dict2019 = dict_t(p2019_cleaned)
-dict2020 = dict_t(p2020_cleaned)
 
 #group less important types in "altro"
-dict2018grouped = group(dict2018)
-dict2019grouped = group(dict2019)
-dict2020grouped = group(dict2020)
+grouped2018 = group(p2018_cleaned)
+grouped2019 = group(p2019_cleaned)
+grouped2020 = group(p2020_cleaned)
 
-# print('2018', dict2018grouped, '\n')
-# print('2019', dict2019grouped, '\n')
-# print('2020', dict2020grouped, '\n')
+#count occurrences of types HE for each year
+dict2018 = dict_t(grouped2018)
+dict2019 = dict_t(grouped2019)
+dict2020 = dict_t(grouped2020)
+
+print(2018, dict2018)
+print(2018, dict2019)
+print(2018, dict2020)
 
 #add data manually
+
 years = np.array([2018,2019,2020])
 data = pd.DataFrame({
     "FHE":[18,28,27],
-    "HE":[11,18,16],
-    "Altro":[8,10,20]
+    "Altro":[22,24,30],
+    "HE":[11,18,16]
     }, 
     index=years
 )
 
-values = np.array([18,11,8,5,6,1,2,28,18,10,7,5,1,1,27,16,20,4,3,0,3])
+values = np.array([18,22,11,28,24,18,27,30,16])
+
 
 hunds = [100 for x in values]
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
-r1 = [x * (barWidth / 7) for x in r1]
+r1 = [x * (barWidth / 3) for x in r1]
 
 #plot
 data.plot(kind="bar", width=barWidth)
 plt.xticks(rotation='horizontal', fontsize=textsize)
-plt.yticks(np.arange(0,35,5), fontsize=textsize)
-plt.axis(ymin=0, ymax=30)
+plt.yticks(np.arange(0,40,5), fontsize=textsize)
+plt.axis(ymin=0, ymax=35)
 
 #insert total and ratio 
 padding = 0
 for i,v in enumerate(values):
     if i in [0] :
-        plt.text(r1[i] + padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
-    elif v < 10 :
-        plt.text(r1[i]+ padding - 0.34,v + 0.2 , "{}".format(str(v)), size = textsize)
-    elif i % 7 == 0 :
+        plt.text(r1[i] + padding - 0.29,v + 0.2 , "{}".format(str(v)), size = textsize)
+    elif i % 3 == 0 :
         padding += 0.25
-        plt.text(r1[i] + padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
+        plt.text(r1[i] + padding - 0.29,v + 0.2 , "{}".format(str(v)), size = textsize)
     else :   
-        plt.text(r1[i]+ padding - 0.36,v + 0.2 , "{}".format(str(v)), size = textsize)
+        plt.text(r1[i]+ padding - 0.29,v + 0.2 , "{}".format(str(v)), size = textsize)
 
 
 #legend
 plt.xlabel("Anno")
 plt.ylabel("Numero di utilizzi")
-plt.legend(loc="best", fontsize=textsize)
+plt.legend(loc="upper left", fontsize=textsize)
 
 plt.tight_layout()
 
 #save figure
-plt.savefig('../data/figures/typesHE_vs_years.pdf')
+plt.savefig('../data/figures/fhe_vs_other_years.pdf')
+
+

@@ -35,58 +35,49 @@ for t in types :
         types_cleaned.append(t)
 
 
-#create dictionary to count occurrences of types
-dict_t = dict()
-for t in types_cleaned :
-    dict_t[t] = dict_t.get(t, 0) + 1
-
-#group k in 'altro' when value(k) <= 3
+#group k in 'altro' if (k != FHE) and (k != HE)
 types_final = list()
-for k,v in dict_t.items() :
-    if v <= 4 and k != 'APX-HE':
-        for i in range(v) :
-            types_final.append('Altro')
+for elem in types_cleaned :
+    if elem != 'FHE' and elem != 'HE':
+        types_final.append('Altro')
     else :
-        for i in range (v) :
-            types_final.append(k)
+        types_final.append(elem)
 
 #new dictionary with "altro" added
-dict_t2 = dict()
+dict_types = dict()
 for t in types_final :
-    dict_t2[t] = dict_t2.get(t, 0) + 1
+    dict_types[t] = dict_types.get(t, 0) + 1
 
 #sort dictionary for value
-sorted_d = dict( sorted(dict_t2.items(), key=operator.itemgetter(1), reverse=True))
+sorted_d = dict( sorted(dict_types.items(), key=operator.itemgetter(1)))
 
-#print(sorted_d)
+print(sorted_d)
 
-names = list(sorted_d.keys())
-values = list(sorted_d.values())
+names = ['FHE','Altro','HE']
+values = [73,76,45]
+
+for i, (k,v) in enumerate(zip(names,values)) :
+    plt.bar(x=k, width=barWidth, height=v,label=k, alpha=0.8)
 
 hunds = [100 for x in values]
 # Set position of bar on y axis
 r1 = np.arange(len(hunds))
-r1 = [x for x in r1]
-r2 = [x + (barWidth /len(names)) for x in r1]
 
-
-
-#plot
-plt.bar(names, values, width=barWidth, alpha=0.8)
-plt.xticks(fontsize=textsize)
-plt.yticks(fontsize=textsize)
-plt.ylabel("Numero di utilizzi")
-plt.xlabel("Tipo HE")
-plt.axis(ymin=0, ymax=80)
-
-#insert total for each language
+# Add text on bars
 for i,v in enumerate(values):
-    if v<10 : 
-        plt.text(r1[i] - 0.08, v + 0.3, "{}".format(str(v)), size = textsize)
+    if i in [0] :
+        plt.text(r1[i] - 0.1, v + 1.5, "{}".format(str(v)), size = textsize)
     else :
-        plt.text(r1[i] - 0.13, v + 0.3, "{}".format(str(v)), size = textsize)  
+        plt.text(r1[i] - 0.05, v + 0.7, "{}".format(str(v)), size = textsize)
 
+# plt.title("Coinvolgimento delle industrie", fontsize=textsize + 2)
+plt.axis(ymax=90)
+plt.xticks(fontsize=textsize - 1)
+plt.yticks(fontsize=textsize - 1)
+plt.xlabel("Tipo HE", fontsize=textsize + 1)
+plt.ylabel("Numero di utilizzi", fontsize=textsize + 1)
+plt.legend(loc="upper right")
 plt.tight_layout()
 
 #save figure
-plt.savefig('../data/figures/typesHE.pdf')
+plt.savefig('../data/figures/fhe_vs_other.pdf', format='pdf')

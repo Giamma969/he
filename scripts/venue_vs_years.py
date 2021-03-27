@@ -19,8 +19,8 @@ barWidth = 0.5
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
 #take both original sheets
-df1 = pd.read_excel (IN_FILE, sheet_name='Copia selezione')
-df2 = pd.read_excel (IN_FILE, sheet_name='Copia snowballing')
+df1 = pd.read_excel (IN_FILE, sheet_name='Selezione rivisto')
+df2 = pd.read_excel (IN_FILE, sheet_name='Snowballing rivisto')
 
 #Extract the columns "Tipo Venue","Anno" and merge
 df1_dropped = df1[['Tipo Venue','Anno']]

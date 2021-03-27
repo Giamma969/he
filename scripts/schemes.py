@@ -12,8 +12,8 @@ textsize = 7
 IN_FILE = '../data/search_and_snowballing_HE.xlsx'
 
 #take both original sheets
-df1 = pd.read_excel (IN_FILE, sheet_name='Copia selezione')
-df2 = pd.read_excel (IN_FILE, sheet_name='Copia snowballing')
+df1 = pd.read_excel (IN_FILE, sheet_name='Selezione rivisto')
+df2 = pd.read_excel (IN_FILE, sheet_name='Snowballing rivisto')
 
 #Extract the column "Schema di crittografia" and merge
 df1_dropped = df1[['Schema di crittografia']]
@@ -67,7 +67,7 @@ plt.xlim(0,55)
 plt.xticks(np.arange(0,55,5), fontsize=textsize - 1)
 plt.yticks(fontsize=textsize)
 plt.xlabel("Numero applicazioni (%)", fontsize=textsize + 1)
-plt.ylabel("Schemi", fontsize=textsize + 1)
+plt.ylabel("Crittosistemi omomorfici", fontsize=textsize + 1)
 
 # Add text on bars
 for i, (v, p) in enumerate(zip(values, ratios)):
